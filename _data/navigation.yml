@@ -1,4 +1,4 @@
-# main links links
+# main links
 main:
   - title: "Publications"
     url: /publications/
@@ -12,8 +12,8 @@ main:
   # - title: "Portfolio"
   #   url: /portfolio/
     
-  - title: "CV"
-    url: /cv/
+  # - title: "CV"
+  #   url: /cv/
 
   - title: "Contact Me"
     url: /contact/

@@ -11,6 +11,16 @@ author_profile: true
 
 {% include base_path %}
 
-{% for post in site.publications reversed %}
+{% for post in site.journal_papers reversed %}
+  {% include archive-single.html %}
+{% endfor %}
+
+## Conference Papers
+{% for post in site.conference_papers reversed %}
+  {% include archive-single.html %}
+{% endfor %}
+
+## Other Publications
+{% for post in site.other_publications reversed %}
   {% include archive-single.html %}
 {% endfor %}
