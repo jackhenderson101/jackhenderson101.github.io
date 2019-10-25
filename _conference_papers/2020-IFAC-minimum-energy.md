@@ -12,3 +12,6 @@ abstract: 'We present a new approach to the cooperative localisation problem by 
 ---
 Currently under review.
 
+## Simulation Code
+The code used to run the simulations presented in the paper is available [here](/files/filtering-testbench-2019-10-25.zip).
+Follow the instructions in the README file to get started. The exact simulation from the paper is located at ``/src/tests/simulations/IFAC2020/ascc_comparison.py``.
