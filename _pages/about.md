@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Hi, I'm Jack"
+title: "Jack Henderson - Mechatronics Engineer, PhD Student"
 excerpt: "About me"
 author_profile: true
 redirect_from: 
@@ -8,8 +8,9 @@ redirect_from:
   - /about.html
 ---
 
-I am a research student at the Australian National University, working towards a PhD in Robotics.
+Hi, I'm Jack, a research student at the Australian National University, working towards a PhD in Robotics.
 
-My area of research is in collaborative localisation for networks of robots, with a specific interest in minimum energy filtering techniques. In layman's terms, I'm trying to find better ways for robots to share information among themselves, so that each of them can get a better idea of where they are in their environment.
-
-My research is supervised by [Jochen Trumpf](http://users.cecs.anu.edu.au/~trumpf/) and [Robert Mahony](https://users.cecs.anu.edu.au/~Robert.Mahony/) at the ANU, and is supported by [Defence Science and Technology Group](https://www.dst.defence.gov.au/).
+I graduated with a Bachelor's degree in Mechatronic Engineering from ANU in 2018 and started my PhD in 2019.
+ My research is about exploring new techniques and approaches to create better algorithms for multi-vehicle collaborative localisation. If you want to learn more about my research, check out my [Thesis Proposal Review](/publication/2020-thesis-proposal-review).
+  
+ My research is supervised by [Jochen Trumpf](http://users.cecs.anu.edu.au/~trumpf/) and [Robert Mahony](https://users.cecs.anu.edu.au/~Robert.Mahony/) at the ANU, and is generously supported by [Defence Science and Technology Group](https://www.dst.defence.gov.au/).

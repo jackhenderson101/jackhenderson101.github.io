@@ -51,7 +51,12 @@ layout: default
 
 
         {% if page.paperurl %}
-        <p><a href="{{ page.paperurl }}">Download Paper</a></p>
+        <p><a href="{{ page.paperurl }}"> {% if page.paperurl_title %} {{page.paperurl_title }} {% else %} Download Paper {% endif %}</a></p>
+        {% endif %}
+
+
+        {% if page.doi %}
+          <p>DOI: <a href="https://doi.org/{{ page.doi }}">{{ page.doi }}</a></p>
         {% endif %}
              
         {% if page.citation %}
