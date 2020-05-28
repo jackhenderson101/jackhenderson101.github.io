@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "Jack Henderson"
 title_separator          : "-"
 name                     : &name "Jack Henderson"
-description              : &description "personal description"
+description              : &description ""
 url                      : https://jackhenderson.com.au # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "jackhenderson101/jackhenderson101.github.io"
@@ -84,7 +84,7 @@ author:
   location         : "Canberra, Australia"
   employer         : "Australian National University"
   pubmed           : 
-  googlescholar    : 
+  googlescholar    : "https://scholar.google.com.au/citations?user=vBzSmwIAAAAJ"
   email            :
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
