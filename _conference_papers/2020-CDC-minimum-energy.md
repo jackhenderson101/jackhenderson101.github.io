@@ -3,7 +3,7 @@ title: "A Minimum Energy Filter for Localisation of an Unmanned Aerial Vehicle"
 collection: conference_papers
 permalink: /publication/2020-CDC-Minimum-Energy-UAV
 excerpt: ''
-published: 'in_review'
+published: 'to_appear'
 date: 2020-12-8
 venue: '59th Conference on Decision and Control (CDC)'
 paperurl: # 'https://arxiv.org/'
