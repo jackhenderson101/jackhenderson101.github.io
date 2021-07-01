@@ -163,7 +163,7 @@ global:log_level=LOG_ALL
 
 Again, highlighting the key values:
 * `ptpengine:preset=slaveonly` we now set to slave mode, so it doesn't try to serve clock data to others
-* ` clock:step_startup=y, clock:step_startup_force=y, clock:set_rtc_on_step=y`
+* `clock:step_startup=y, clock:step_startup_force=y, clock:set_rtc_on_step=y`
   These options will force the clock to 'jump' to the correct time when it first connects to the master clock. The alternative is to wait a very long time for the clock to slowly adjust to the correct time.
 
 Copies of the configuration files are available [here](https://gitlab.anu.edu.au/u5561978/ros_ptp_monitor/-/tree/master/ptp_conf)
