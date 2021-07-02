@@ -1,22 +1,22 @@
 ---
-title: "Clock Synchronisation over Wifi Networks"
+title: "Clock Synchronisation over Wi-Fi Networks"
 collection: projects
 permalink: /projects/time-synchronisation
 date: 2021-06-11
 venue: "PhD Research"
 ---
 
-In this report, I will be discussing clock synchronisation, why we need it, how I implemented it, and some potential issues when synchronising over Wifi networks.
+In this report, I will be discussing clock synchronisation, why we need it, how I implemented it, and some potential issues when synchronising over Wi-Fi networks.
 
 # Introduction
 
-During the course of my PhD research I needed to collect some experimental data to verify and validate the [multi-robot collaborative localisation algorithms](/publication/2020-thesis-proposal-review) I was developing. In the lab, we have a number of UGVs (Unmanned Ground Vehicles) as well as several UAVs (Unmanned Aerial Vehicles) each equipped with IMU (Inertial Measurment Unit), UWB (Ultrawide Band), and cameras.
+During the course of my PhD research I needed to collect some experimental data to verify and validate the [multi-robot collaborative localisation algorithms](/publication/2020-thesis-proposal-review) I was developing. In the lab, we have a number of UGVs (Unmanned Ground Vehicles) as well as several UAVs (Unmanned Aerial Vehicles) each equipped with IMU (Inertial Measurement Unit), UWB (Ultra Wide-band), and cameras.
 
 ![image](/images/time_synchronisation/quad.jpg){:width="48%"} ![image](/images/time_synchronisation/jackal.jpg){:width="48%"}
 *The UAV and UGV used for experimental work*
 
 To create a dataset to test the algorithms, we needed to drive/fly all the vehicles around in the same space at the same time and then collect the sensor data from each vehicle.
-Each vehicle's onboard computer is running ROS, the Robot Operating System, which provides a standardised way to manage all of the different sensors and processing systems.
+Each vehicle's onboard computer is running ROS, the Robot Operating System, which provides a standardised way to manage all the different sensors and processing systems.
 We also have a VICON motion capture system in the lab which provides us with the ground-truth position information for each vehicle.
 
 # Why we need to synchronise clocks
@@ -33,7 +33,7 @@ However, an hour later, Clock A might read 11:00:00, while clock B reads 11:00:2
 
 # Methods for Clock Synchronisation
 
-For our data collection experiment we have two options for synchronisation, either real-time or post-processed. Post-processing tries to determine the clock offset by analysing the data after it has been recorded. The [EuRoC dataset](https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets) is an example of this method. The IMU measurements onboard the vehicle are temporally aligned with the ground-truth VICON measurements using a maximum likelhood estimator. This requires a significant amount of processing, and also means that the data is not fully independent of the ground truth.
+For our data collection experiment we have two options for synchronisation, either real-time or post-processed. Post-processing tries to determine the clock offset by analysing the data after it has been recorded. The [EuRoC dataset](https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets) is an example of this method. The IMU measurements onboard the vehicle are temporally aligned with the ground-truth VICON measurements using a maximum likelihood estimator. This requires a significant amount of processing, and also means that the data is not fully independent of the ground truth.
 
 Real-time methods attempt to adjust the clocks so that they as closely aligned as possible, thus measurements recorded on different vehicles will be correctly timestamped with a common shared time reference. One common way to achieve this is by using GPS/GNSS. The GPS system transmits a high-precision timestamp as part of how the system determines your location, and this can be used as a time source. However, indoors this is not so useful as the signal is too weak.
 
@@ -45,7 +45,7 @@ The main challenge with network-based synchronisation is latency. There is alway
 
 # Configuring PTP
 
-This section contains a brief guide on how I configured the PTP synchronisation for the lab network. Each computer is running either Ubuntu 18.04 or 20.04 with ROS installed (although this is not required). We will designate the groundstation laptop as the 'master clock' and all other computers on the network will synchronise their time to this clock. It doesn't necessarily matter whether the time on the master clock is accurate or not, as long as there is a single common reference time.
+This section contains a brief guide on how I configured the PTP synchronisation for the lab network. Each computer is running either Ubuntu 18.04 or 20.04 with ROS installed (although this is not required). We will designate the ground-station laptop as the 'master clock' and all other computers on the network will synchronise their time to this clock. It doesn't necessarily matter whether the time on the master clock is accurate or not, as long as there is a single common reference time.
 
 ![image](/images/time_synchronisation/network_diagram.png){:width="70%"}
 
@@ -104,7 +104,7 @@ global:log_level=LOG_ALL
 
 Highlighting some important configuration lines:
 
-* `ptpengine:interface=enp0s31f6` This is the network interface that is connected to the network, commonly `eth0` or `wlp2s0` for Wifi. Use the command `ip link show` to list network interfaces.
+* `ptpengine:interface=enp0s31f6` This is the network interface that is connected to the network, commonly `eth0` or `wlp2s0` for Wi-Fi. Use the command `ip link show` to list network interfaces.
 * `ptpengine:preset=masteronly` We set this computer as the master clock as there is no other reference clock.
 * `ptpengine:use_libpcap=n` I found that the system did not work with this enabled.
 
@@ -169,7 +169,7 @@ Again, highlighting the key values:
 Copies of the configuration files are available [here](https://gitlab.anu.edu.au/u5561978/ros_ptp_monitor/-/tree/master/ptp_conf)
 
 # Testing PTP Synchronisation
-The PTP service should automatically start on boot and run in the background. On the master computer, PTP won't start if you are not connected to the network. To view the current status of the PTP srevice;
+The PTP service should automatically start on boot and run in the background. On the master computer, PTP won't start if you are not connected to the network. To view the current status of the PTP service;
 ```bash
 systemctl status ptpd
 ```
@@ -287,10 +287,10 @@ I have also written a small ROS node which monitors `ptpd2.status` and reports t
 
 [The code is available here](https://gitlab.anu.edu.au/u5561978/ros_ptp_monitor)
 
-# Reducing Latency over Wifi
-As disucssed above, the main challenge in network time synchronisation is determining the latency between the master and the slave. The key is not in having a small latency, but a small jitter. Wired ethernet networks have very low latencies and jitters, which is ideal for synchronisation, however you can't have an ethernet cable connect to a drone as it is flying around. Wifi is the only alternative, but suffers from higher latency and jitter. This can be caused by congestion on the network, or by radio interference from other source, especially when using the 2.4Ghz band.
+# Reducing Latency over Wi-Fi
+As discussed above, the main challenge in network time synchronisation is determining the latency between the master and the slave. The key is not in having a small latency, but a small jitter. Wired ethernet networks have very low latencies and jitters, which is ideal for synchronisation, however you can't have an ethernet cable connect to a drone as it is flying around. Wi-Fi is the only alternative, but suffers from higher latency and jitter. This can be caused by congestion on the network, or by radio interference from other source, especially when using the 2.4Ghz band.
 
-when initally trying to synchronise, we ran into a issue with high jitter over the Wifi network. For example, we can see this using the ping command
+when initially trying to synchronise, we ran into an issue with high jitter over the Wi-Fi network. For example, we can see this using the ping command
 ```
 
 PING quad2.lab (192.168.0.102) 56(84) bytes of data.
@@ -326,11 +326,11 @@ Offset from Master :  0.085416869 s, mean  0.103360017 s, dev  0.021307977 s
 Mean Path Delay    :  0.030811354 s, mean  0.031216654 s, dev  0.000908046 s
 Clock correction   :  1000.000 ppm (slewing at maximum rate)
 ```
-which indicates that the sychronisation is only accurate to within 100ms, because the jitter on the Wifi is so high. The clock correction is also high as it is constantly trying to adjust the clock back and forth.
+which indicates that the synchronisation is only accurate to within 100ms, because the jitter on the Wi-Fi is so high. The clock correction is also high as it is constantly trying to adjust the clock back and forth.
 
-After much trial and error, and after replacing the Wifi router and changing to a 5 Ghz network, the root cause of the problem was determined to be a power-saving feature in the Wifi card. In order to save power, the Wifi chip will buffer outgoing packets for some period of time and then send them all at once. Ordinarily, this is useful for most activities, but for time-sensitve packets, such as PTP, this introduces an unknown delay in the network, making it extremely difficult to get accurate time synchronisation.
+After much trial and error, and after replacing the Wi-Fi router and changing to a 5 Ghz network, the root cause of the problem was determined to be a power-saving feature in the Wi-Fi card. In order to save power, the Wi-Fi chip will buffer outgoing packets for some period of time and then send them all at once. Ordinarily, this is useful for most activities, but for time-sensitive packets, such as PTP, this introduces an unknown delay in the network, making it extremely difficult to get accurate time synchronisation.
 
-If we look at `iwconfig wlan0`, we can see that power managemnet is turned on
+If we look at `iwconfig wlan0`, we can see that power management is turned on
 ```
 wlan0     IEEE 802.11  ESSID:"Teleop5G"  
           Mode:Managed  Frequency:5.18 GHz  Access Point: E0:46:9A:0E:A7:AD   
